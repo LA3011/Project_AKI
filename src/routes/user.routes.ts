@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { getUsers } from '../controllers/user.controller.js';
 import { login, refreshToken, register } from '../controllers/auth.controller.js';
 import { authenticateJWT } from '../middlewares/auth.handler.js';
+import { authRateLimit } from '../middlewares/rateLimit.handler.js';
 
 const router = Router();
 
@@ -65,7 +66,7 @@ router.get('/', authenticateJWT, getUsers);
  *       500:
  *         description: Error interno
  */
-router.post('/register', register);
+    router.post('/register', authRateLimit, register);
 
 /**
  * @openapi
@@ -95,7 +96,7 @@ router.post('/register', register);
  *       401:
  *         description: Credenciales incorrectas
  */
-router.post('/login', login);
+    router.post('/login', authRateLimit, login);
 
 /**
  * @openapi

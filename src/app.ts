@@ -9,12 +9,14 @@ import productRoutes from './routes/product.routes.js';
 import { viewConnection } from './config/database.pg.js';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerDocs } from './config/swagger.js';
+import { globalRateLimit } from './middlewares/rateLimit.handler.js';
 
 // Configuración [variables de entorno]
 dotenv.config();
 
 // Configuracion Server
 const app: Application = express();
+app.set('trust proxy', 1);
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || 'localhost'
 
@@ -24,6 +26,7 @@ viewConnection();
 // Middlewares [Globales]
 app.use(cors());
 app.use(express.json());
+app.use(globalRateLimit);
 
 // Rutas
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
