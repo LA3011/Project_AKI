@@ -1,4 +1,4 @@
-import { type Request, type Response } from 'express';
+import type { Request, Response } from 'express';
 import { ProductRepository } from '../repositories/product.repository.js';
 import { catchAsync } from '../utils/catchAsync.js';
 import { AppError } from '../utils/custom.error.js';

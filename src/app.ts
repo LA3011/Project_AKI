@@ -1,4 +1,4 @@
-import express, { type Application, type Request, type Response } from 'express';
+import express, { type Application } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
@@ -7,6 +7,8 @@ import userRoutes from './routes/user.routes.js';
 import productRoutes from './routes/product.routes.js';
 
 import { viewConnection } from './config/database.pg.js';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerDocs } from './config/swagger.js';
 
 // Configuración [variables de entorno]
 dotenv.config();
@@ -24,6 +26,7 @@ app.use(cors());
 app.use(express.json());
 
 // Rutas
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 
@@ -31,5 +34,5 @@ app.use('/api/products', productRoutes);
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://${HOST}:${PORT}`);
+  console.log(`[Server] running on http://${HOST}:${PORT}`);
 });
