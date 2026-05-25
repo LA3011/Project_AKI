@@ -10,7 +10,6 @@ const swaggerOptions: swaggerJSDoc.Options = {
     },
     servers: [
       {
-        // Usamos una ruta relativa o la variable de entorno para mayor flexibilidad
         url: `http://localhost:${process.env.PORT || 3000}`,
       },
     ],
@@ -24,7 +23,6 @@ const swaggerOptions: swaggerJSDoc.Options = {
       },
     },
   },
-  // Apuntamos a las rutas para que procese los comentarios JSDoc
   apis: [
     './src/routes/*.ts', 
     './dist/routes/*.js'

@@ -20,6 +20,6 @@ export const authenticateJWT = (req: Request, res: Response, next: NextFunction)
     }
  
   } else {
-    res.status(401).json({ message: 'Acceso denegado: No se proporcionó token' });
+    res.status(401).json({ message: 'No autorizado: No se proporcionó token' });
   }
 };
