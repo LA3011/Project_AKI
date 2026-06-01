@@ -43,8 +43,10 @@ export const UserRepository = {
         nombres = COALESCE($5, nombres),
         apellidos = COALESCE($6, apellidos),
         telefono = COALESCE($7, telefono),
-        foto_perfil = COALESCE($8, foto_perfil)
-      WHERE id_usuario = $9
+        foto_perfil = COALESCE($8, foto_perfil),
+        correo = COALESCE($9, correo),
+        verificado = COALESCE($10, verificado)
+      WHERE id_usuario = $11
       RETURNING id_usuario, tipo_usuario, id_estado, id_municipio, id_ciudad, 
                 nombres, apellidos, correo, telefono, foto_perfil, 
                 ultimo_login, verificado, estado, fecha_registro
@@ -59,6 +61,8 @@ export const UserRepository = {
       data.apellidos ?? null,
       data.telefono ?? null,
       data.foto_perfil ?? null,
+      data.correo ?? null,
+      data.verificado ?? null,
       id
     ];
 
@@ -118,7 +122,7 @@ export const UserRepository = {
       throw new Error('Error al guardar el token de recuperación');
     }
   },
-  
+
   async findByResetToken(token: string): Promise<any | null> {
     const sql = `
       SELECT id_usuario, token_recuperacion_expira 
@@ -134,7 +138,7 @@ export const UserRepository = {
       throw new Error('Error al buscar el token de recuperación');
     }
   },
-  
+
   async updatePasswordAndClearToken(id: string | number, hashedPassword: string): Promise<void> {
     const sql = `
       UPDATE public.usuarios 
