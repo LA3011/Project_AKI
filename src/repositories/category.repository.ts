@@ -33,8 +33,9 @@ export const CategoryRepository = {
             SET 
                 nombre = COALESCE($1, nombre),
                 icono = COALESCE($2, icono),
-                descripcion = COALESCE($3, descripcion)
-            WHERE id_categoria = $4
+                descripcion = COALESCE($3, descripcion),
+                estado = COALESCE($4, estado),
+            WHERE id_categoria = $5
             RETURNING ${CATEGORY_FIELDS}
         `;
         
@@ -42,6 +43,7 @@ export const CategoryRepository = {
             data.nombre ?? null,
             data.icono ?? null,
             data.descripcion ?? null,
+            data.estado ?? null,
             id
         ];
         
