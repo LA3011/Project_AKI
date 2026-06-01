@@ -64,8 +64,9 @@ export const CompanyBranchRepository = {
                 telefono = COALESCE($6, telefono),
                 correo = COALESCE($7, correo),
                 foto_principal = COALESCE($8, foto_principal),
-                descripcion = COALESCE($9, descripcion)
-            WHERE id_sucursal = $10
+                descripcion = COALESCE($9, descripcion),
+                estado = COALESCE($10, estado)
+            WHERE id_sucursal = $11
             RETURNING ${BRANCH_FIELDS}
         `;
         const values = [
@@ -78,6 +79,7 @@ export const CompanyBranchRepository = {
             data.correo ?? null,
             data.foto_principal ?? null,
             data.descripcion ?? null,
+            data.estado ?? null,
             id
         ];
         const { rows } = await query(sql, values);
