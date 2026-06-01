@@ -46,7 +46,8 @@ export const UserRepository = {
         foto_perfil = COALESCE($8, foto_perfil),
         correo = COALESCE($9, correo),
         verificado = COALESCE($10, verificado)
-      WHERE id_usuario = $11
+        estado = COALESCE($11, estado)
+      WHERE id_usuario = $12
       RETURNING id_usuario, tipo_usuario, id_estado, id_municipio, id_ciudad, 
                 nombres, apellidos, correo, telefono, foto_perfil, 
                 ultimo_login, verificado, estado, fecha_registro
@@ -63,6 +64,7 @@ export const UserRepository = {
       data.foto_perfil ?? null,
       data.correo ?? null,
       data.verificado ?? null,
+      data.estado ?? null,
       id
     ];
 
