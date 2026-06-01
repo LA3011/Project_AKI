@@ -26,7 +26,7 @@ export const getCategoryById = catchAsync(async (req: Request, res: Response) =>
 
 export const createCategory = catchAsync(async (req: Request, res: Response) => {
 
-    const { nombre, descripcion } = req.params;
+    const { nombre, descripcion } = req.body;
 
     if (!nombre || !descripcion) {
         return res.status(400).json({
