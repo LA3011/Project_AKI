@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { authRateLimit } from '../middlewares/rateLimit.handler.js';
 import { forgotPassword, login, refreshToken, register, resetPassword } from '../controllers/auth.controller.js';
+import { authenticateJWT } from '../middlewares/auth.handler.js';
 
 const router = Router();
 
@@ -91,8 +92,8 @@ const router = Router();
  *       500:
  *         description: Error interno { message, error }
  */
-router.post('/register', authRateLimit, register);
-
+router.post('/register', authRateLimit, authenticateJWT, register);
+ 
 /**
  * @openapi
  * /api/auth/login:
