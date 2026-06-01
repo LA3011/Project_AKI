@@ -30,11 +30,21 @@ export const CategoryRepository = {
     async update(id: string, data: Partial<Category>): Promise<Category | null> {
         const sql = `
             UPDATE public.categorias
-            SET nombre = $1, icono = $2, descripcion = $3
+            SET 
+                nombre = COALESCE($1, nombre),
+                icono = COALESCE($2, icono),
+                descripcion = COALESCE($3, descripcion)
             WHERE id_categoria = $4
             RETURNING ${CATEGORY_FIELDS}
         `;
-        const values = [data.nombre, data.icono, data.descripcion, id];
+        
+        const values = [
+            data.nombre ?? null,
+            data.icono ?? null,
+            data.descripcion ?? null,
+            id
+        ];
+        
         const { rows } = await query(sql, values);
         return rows[0] || null;
     },
