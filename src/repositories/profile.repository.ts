@@ -38,14 +38,16 @@ export const ProfileRepository = {
       SET 
         nombre = COALESCE($1, nombre),
         descripcion = COALESCE($2, descripcion),
-        nivel_acceso = COALESCE($3, nivel_acceso)
-      WHERE id_perfil = $4
+        nivel_acceso = COALESCE($3, nivel_acceso),
+        estado = COALESCE($4, estado)
+      WHERE id_perfil = $5
       RETURNING ${PROFILE_FIELDS}
     `;
     const values = [
       data.nombre ?? null,
       data.descripcion ?? null,
       data.nivel_acceso ?? null,
+      data.estado ?? null,
       id
     ];
     const { rows } = await query(sql, values);
