@@ -34,7 +34,7 @@ export const CategoryRepository = {
                 nombre = COALESCE($1, nombre),
                 icono = COALESCE($2, icono),
                 descripcion = COALESCE($3, descripcion),
-                estado = COALESCE($4, estado),
+                estado = COALESCE($4, estado)
             WHERE id_categoria = $5
             RETURNING ${CATEGORY_FIELDS}
         `;
