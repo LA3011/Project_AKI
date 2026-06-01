@@ -25,12 +25,12 @@ export const getCompanyById = catchAsync(async (req: Request, res: Response) => 
 export const createCompany = catchAsync(async (req: Request, res: Response) => {
 
 
-    const { descripcion, id_usuario, id_estado, id_municipio, id_ciudad } = req.body;
+    const { descripcion, id_usuario, id_estado, id_municipio, id_ciudad, nombre_comercial } = req.body;
 
-    if (!descripcion || !id_usuario || !id_estado || !id_municipio || !id_ciudad) {
+    if (!descripcion || !id_usuario || !id_estado || !id_municipio || !id_ciudad || !nombre_comercial) {
         return res.status(400).json({
             success: false,
-            message: 'Faltan campos obligatorios para generar la empresa/entidad (descripcion, id_usuario, id_estado, id_municipio, id_ciudad)'
+            message: 'Faltan campos obligatorios para generar la empresa/entidad (descripcion, id_usuario, id_estado, id_municipio, id_ciudad, nombre_comercial)'
         });
     }
 

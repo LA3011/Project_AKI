@@ -61,8 +61,9 @@ export const CompanyRepository = {
                 rif = COALESCE($7, rif),
                 pagina_web = COALESCE($8, pagina_web),
                 logo = COALESCE($9, logo),
-                descripcion = COALESCE($10, descripcion)
-            WHERE id_empresa = $11
+                descripcion = COALESCE($10, descripcion),
+                estado = COALESCE($11, estado)
+            WHERE id_empresa = $12
             RETURNING ${COMPANY_FIELDS}
         `;
         const values = [
@@ -76,6 +77,7 @@ export const CompanyRepository = {
             data.pagina_web ?? null,
             data.logo ?? null,
             data.descripcion ?? null,
+            data.estado ?? null,
             id
         ];
         const { rows } = await query(sql, values);

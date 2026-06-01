@@ -238,6 +238,7 @@ router.get('/:id', authenticateJWT, getCompanyById);
  *               - id_estado
  *               - id_municipio
  *               - id_ciudad
+ *               - nombre_comercial
  *               - razon_social
  *               - rif
  *             properties:
@@ -256,6 +257,9 @@ router.get('/:id', authenticateJWT, getCompanyById);
  *               id_ciudad:
  *                 type: string
  *                 example: "10"
+ *               nombre_comercial:
+ *                 type: string
+ *                  example: "Corporación Inversiones"
  *               razon_social:
  *                 type: string
  *                 example: "Corporación Inversiones del Centro C.A."
@@ -277,6 +281,7 @@ router.get('/:id', authenticateJWT, getCompanyById);
  *             id_estado: "4"
  *             id_municipio: "11"
  *             id_ciudad: "10"
+ *             nombre_comercial: "Corporación Inversiones"
  *             razon_social: "Corporación Inversiones del Centro C.A."
  *             rif: "J-31234565-8"
  *             pagina_web: "https://inversionescentro.com"
@@ -314,6 +319,9 @@ router.get('/:id', authenticateJWT, getCompanyById);
  *                     id_ciudad:
  *                       type: integer
  *                       example: 10
+ *                     nombre_comercial:
+ *                       type: string
+ *                       example: "Corporación Inversiones"
  *                     razon_social:
  *                       type: string
  *                       example: "Corporación Inversiones del Centro C.A."
@@ -346,6 +354,7 @@ router.get('/:id', authenticateJWT, getCompanyById);
  *                 id_estado: 4
  *                 id_municipio: 11
  *                 id_ciudad: 10
+ *                 nombre_comercial: "Corporación Inversiones"
  *                 razon_social: "Corporación Inversiones del Centro C.A."
  *                 rif: "J-31234565-8"
  *                 pagina_web: "https://inversionescentro.com"
@@ -411,6 +420,9 @@ router.post('/', authenticateJWT, createCompany);
  *               id_ciudad:
  *                 type: string
  *                 example: "10"
+ *               nombre_comercial:
+ *                 type: string
+ *                 example: "Corporación Inversiones"
  *               razon_social:
  *                 type: string
  *                 example: "testing"
@@ -432,6 +444,7 @@ router.post('/', authenticateJWT, createCompany);
  *             id_estado: "4"
  *             id_municipio: "11"
  *             id_ciudad: "10"
+ *             nombre_comercial: "Corporación Inversiones"
  *             razon_social: "testing"
  *             rif: "12345"
  *             pagina_web: "https://inversionescentro.com"
@@ -469,6 +482,9 @@ router.post('/', authenticateJWT, createCompany);
  *                     id_ciudad:
  *                       type: integer
  *                       example: 10
+ *                     nombre_comercial:
+ *                       type: string
+ *                       example: "Corporación Inversiones"
  *                     razon_social:
  *                       type: string
  *                       example: "testing"
@@ -500,6 +516,7 @@ router.post('/', authenticateJWT, createCompany);
  *                 id_estado: 4
  *                 id_municipio: 11
  *                 id_ciudad: 10
+ *                 nombre_comercial: "Corporación Inversiones"
  *                 razon_social: "testing"
  *                 rif: "12345"
  *                 pagina_web: "https://inversionescentro.com"
@@ -564,6 +581,9 @@ router.put('/:id', authenticateJWT, updateCompany);
  *                     id_ciudad:
  *                       type: integer
  *                       example: 10
+ *                     nombre_comercial:
+ *                       type: string
+ *                       example: "Corporación Inversiones"
  *                     razon_social:
  *                       type: string
  *                       example: "testing"
@@ -596,6 +616,7 @@ router.put('/:id', authenticateJWT, updateCompany);
  *                 id_estado: 4
  *                 id_municipio: 11
  *                 id_ciudad: 10
+ *                 nombre_comercial: Corporación Inversiones
  *                 razon_social: "testing"
  *                 rif: "12345"
  *                 pagina_web: "https://inversionescentro.com"
