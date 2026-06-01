@@ -35,12 +35,14 @@ export const AdministratorRepository = {
         const sql = `
             UPDATE public.administradores
             SET 
-                id_perfil = COALESCE($1, id_perfil)
-            WHERE id_administrador = $2
+                id_perfil = COALESCE($1, id_perfil),
+                estado = COALESCE($2, estado)
+            WHERE id_administrador = $3
             RETURNING ${ADMIN_FIELDS}
         `;
         const values = [
             data.id_perfil ?? null,
+            data.estado ?? null,
             id
         ];
         const { rows } = await query(sql, values);
