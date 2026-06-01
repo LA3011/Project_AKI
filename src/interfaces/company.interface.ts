@@ -5,6 +5,7 @@ export interface Company {
     id_estado: string;
     id_municipio: string;
     id_ciudad: string;
+    nombre_comercial: string;
     razon_social: string;
     rif: string;
     pagina_web: string;

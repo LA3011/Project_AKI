@@ -3,7 +3,7 @@ import { type Company } from '../interfaces/company.interface.js';
 
 const COMPANY_FIELDS = `
   id_empresa, id_usuario, id_categoria, id_estado, id_municipio, 
-  id_ciudad, razon_social, rif, pagina_web, logo, descripcion, 
+  id_ciudad, nombre_comercial, razon_social, rif, pagina_web, logo, descripcion, 
   estado, fecha_registro
 `;
 
@@ -24,10 +24,10 @@ export const CompanyRepository = {
         const sql = `
             INSERT INTO public.empresas (
                 id_usuario, id_categoria, id_estado, 
-                id_municipio, id_ciudad, razon_social, rif, 
+                id_municipio, id_ciudad, nombre_comercial, razon_social, rif, 
                 pagina_web, logo, descripcion, estado
             )
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
             RETURNING ${COMPANY_FIELDS}
         `;
         const values = [
@@ -36,6 +36,7 @@ export const CompanyRepository = {
             data.id_estado,
             data.id_municipio,
             data.id_ciudad,
+            data.nombre_comercial,
             data.razon_social,
             data.rif,
             data.pagina_web,
@@ -55,12 +56,13 @@ export const CompanyRepository = {
                 id_estado = COALESCE($2, id_estado),
                 id_municipio = COALESCE($3, id_municipio),
                 id_ciudad = COALESCE($4, id_ciudad),
-                razon_social = COALESCE($5, razon_social),
-                rif = COALESCE($6, rif),
-                pagina_web = COALESCE($7, pagina_web),
-                logo = COALESCE($8, logo),
-                descripcion = COALESCE($9, descripcion)
-            WHERE id_empresa = $10
+                nombre_comercial = COALESCE($5, nombre_comercial),
+                razon_social = COALESCE($6, razon_social),
+                rif = COALESCE($7, rif),
+                pagina_web = COALESCE($8, pagina_web),
+                logo = COALESCE($9, logo),
+                descripcion = COALESCE($10, descripcion)
+            WHERE id_empresa = $11
             RETURNING ${COMPANY_FIELDS}
         `;
         const values = [
@@ -68,6 +70,7 @@ export const CompanyRepository = {
             data.id_estado ?? null,
             data.id_municipio ?? null,
             data.id_ciudad ?? null,
+            data.nombre_comercial ?? null,
             data.razon_social ?? null,
             data.rif ?? null,
             data.pagina_web ?? null,
