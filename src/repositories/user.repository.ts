@@ -45,7 +45,7 @@ export const UserRepository = {
         telefono = COALESCE($7, telefono),
         foto_perfil = COALESCE($8, foto_perfil),
         correo = COALESCE($9, correo),
-        verificado = COALESCE($10, verificado)
+        verificado = COALESCE($10, verificado),
         estado = COALESCE($11, estado)
       WHERE id_usuario = $12
       RETURNING id_usuario, tipo_usuario, id_estado, id_municipio, id_ciudad, 
