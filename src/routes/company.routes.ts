@@ -53,9 +53,13 @@ const router = Router();
  *                       id_ciudad:
  *                         type: integer
  *                         example: 10
+ *                       nombre_comercial:
+ *                         type: string
+ *                         nullable: false
+ *                         example: "testing"
  *                       razon_social:
  *                         type: string
- *                         nullable: true
+ *                         nullable: false
  *                         example: "testing"
  *                       rif:
  *                         type: string
@@ -87,6 +91,7 @@ const router = Router();
  *                   id_estado: 4
  *                   id_municipio: 11
  *                   id_ciudad: 10
+ *                   nombre_comercial: Corporación Inversiones
  *                   razon_social: "testing"
  *                   rif: "12345"
  *                   pagina_web: "https://inversionescentro.com"
@@ -100,6 +105,7 @@ const router = Router();
  *                   id_estado: 4
  *                   id_municipio: 11
  *                   id_ciudad: 10
+ *                   nombre_comercial: Corporación Inversiones
  *                   razon_social: null
  *                   rif: null
  *                   pagina_web: "https://inversionescentro.com"
@@ -173,6 +179,9 @@ router.get('/', authenticateJWT, getCompanies);
  *                     id_ciudad:
  *                       type: integer
  *                       example: 10
+ *                     nombre_comercial: 
+ *                       type: string
+ *                       example: "Corporación Inversiones"                      
  *                     razon_social:
  *                       type: string
  *                       example: "testing"
@@ -204,6 +213,7 @@ router.get('/', authenticateJWT, getCompanies);
  *                 id_estado: 4
  *                 id_municipio: 11
  *                 id_ciudad: 10
+ *                 nombre_comercial: "Corporación Inversiones"
  *                 razon_social: "testing"
  *                 rif: "12345"
  *                 pagina_web: "https://inversionescentro.com"
@@ -259,7 +269,7 @@ router.get('/:id', authenticateJWT, getCompanyById);
  *                 example: "10"
  *               nombre_comercial:
  *                 type: string
- *                  example: "Corporación Inversiones"
+ *                 example: "Corporación Inversiones"
  *               razon_social:
  *                 type: string
  *                 example: "Corporación Inversiones del Centro C.A."
