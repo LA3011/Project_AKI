@@ -44,14 +44,16 @@ export const ClientRepository = {
       SET 
         cedula = COALESCE($1, cedula),
         fecha_nacimiento = COALESCE($2, fecha_nacimiento),
-        sexo = COALESCE($3, sexo)
-      WHERE id_cliente = $4
+        sexo = COALESCE($3, sexo),
+        estado = COALESCE($4, estado)
+      WHERE id_cliente = $5
       RETURNING ${CLIENT_FIELDS}
     `;
     const values = [
       data.cedula ?? null,
       data.fecha_nacimiento ?? null,
       data.sexo ?? null,
+      data.estado ?? null,
       id
     ];
     const { rows } = await query(sql, values);
