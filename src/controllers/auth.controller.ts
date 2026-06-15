@@ -4,10 +4,10 @@ import { UserRepository } from '../repositories/user.repository.js';
 import { generateRefreshToken, generateToken, handleForgotPassword, handleResetPassword, verifyRefreshToken } from '../services/auth.service.js';
 
 export const login = async (req: Request, res: Response) => {
-  const { correo, password } = req.body;
+  const { email, password } = req.body;
 
   try {
-    const user = await UserRepository.findByEmail(correo);
+    const user = await UserRepository.findByEmail(email);
     if (!user) return res.status(401).json({ message: 'Credenciales inválidas' });
 
     const isMatch = await bcrypt.compare(password, user.password_hash);
