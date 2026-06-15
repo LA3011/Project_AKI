@@ -23,6 +23,7 @@ import companyRoutes from './routes/company.routes.js';
 import profileRoutes from './routes/profile.routes.js';
 import rewardRoutes from './routes/reward.routes.js';
 import clientRoutes from './routes/client.routes.js';
+import locateRoutes from './routes/locate.routes.js';
 import userRoutes from './routes/user.routes.js';
 import authRoutes from './routes/auth.routes.js';
 
@@ -57,6 +58,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/clients', clientRoutes);
 app.use('/api/rewards', rewardRoutes);
+app.use('/api/locates', locateRoutes);
 app.use('/api/profiles', profileRoutes);
 app.use('/api/bitacoras', bitacoraRoutes); 
 app.use('/api/schedules', scheduleRoutes);
@@ -69,7 +71,7 @@ app.use('/api/payment-methods', paymentMethodRoutes);
 app.use('/api/company-memberships', companyMembershipRoutes);
 app.use('/api/membership-payments', membershipPaymentRoutes);
 app.use('/api/company-administrators', companyAdministratorRoutes); 
-app.use('/api/profile-module-privileges', profileModulePrivilegeRoutes); // 
+app.use('/api/profile-module-privileges', profileModulePrivilegeRoutes); 
 
 // Middleware [Manejo de Errores]
 app.use(errorHandler);
