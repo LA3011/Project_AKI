@@ -380,6 +380,15 @@ router.post('/', authenticateJWT, createBranch);
  *               descripcion:
  *                 type: string
  *                 example: "Sede operativa de distribución para la zona norte."
+ *               id_estado:
+ *                 type: integer
+ *                 example: 4
+ *               id_municipio:
+ *                 type: integer
+ *                 example: 39
+ *               id_ciudad:
+ *                 type: integer
+ *                 example: 58
  *           example:
  *             nombre_sucursal: "Sucursal Norte Prados"
  *             direccion: "Av. Principal con calle 4, Local 12-A"
@@ -387,6 +396,9 @@ router.post('/', authenticateJWT, createBranch);
  *             correo: "norte@inversionescentro.com"
  *             foto_principal: "https://images.com/sucursales/suc-901.png"
  *             descripcion: "Sede operativa de distribución para la zona norte."
+ *             id_estado: 4
+ *             id_municipio: 39
+ *             id_ciudad: 58
  *     responses:
  *       200:
  *         description: "Sucursal actualizada exitosamente (success: true, data: updatedBranch)"
@@ -412,10 +424,10 @@ router.post('/', authenticateJWT, createBranch);
  *                       example: 4
  *                     id_municipio:
  *                       type: integer
- *                       example: 11
+ *                       example: 39
  *                     id_ciudad:
  *                       type: integer
- *                       example: 10
+ *                       example: 58
  *                     nombre_sucursal:
  *                       type: string
  *                       example: "Sucursal Norte Prados"
@@ -446,8 +458,8 @@ router.post('/', authenticateJWT, createBranch);
  *                 id_sucursal: 3
  *                 id_empresa: 3
  *                 id_estado: 4
- *                 id_municipio: 11
- *                 id_ciudad: 10
+ *                 id_municipio: 39
+ *                 id_ciudad: 58
  *                 nombre_sucursal: "Sucursal Norte Prados"
  *                 direccion: "Av. Principal con calle 4, Local 12-A"
  *                 telefono: "02432345678"
