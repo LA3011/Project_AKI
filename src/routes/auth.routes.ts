@@ -107,10 +107,10 @@ router.post('/register', authRateLimit, authenticateJWT, register);
  *           schema:
  *             type: object
  *             required:
- *               - correo
+ *               - email
  *               - password
  *             properties:
- *               correo:
+ *               email:
  *                 type: string
  *                 example: luisrlvas@gmail.com
  *               password:
