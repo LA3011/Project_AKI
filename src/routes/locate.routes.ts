@@ -5,7 +5,7 @@ const router = Router();
 
 /**
  * @openapi
- * /api/state:
+ * /api/locates/state:
  *   get:
  *     summary: Obtiene la lista de estados con sus municipios y ciudades asociadas
  *     tags: [Localidad]
@@ -110,7 +110,7 @@ router.get('/state', getStates);
 
 /**
  * @openapi
- * /api/cities:
+ * /api/locates/cities:
  *   get:
  *     summary: Obtiene la lista de ciudades con sus detalles de municipio y estado
  *     tags: [Localidad]
@@ -218,7 +218,7 @@ router.get('/cities', getCities);
 
 /**
  * @openapi
- * /api/municipalities:
+ * /api/locates/municipalities:
  *   get:
  *     summary: Obtiene la lista de municipios con su estado y ciudades asociadas
  *     tags: [Localidad]
