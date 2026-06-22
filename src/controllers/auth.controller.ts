@@ -2,6 +2,8 @@ import bcrypt from 'bcrypt';
 import type { Request, Response } from 'express';
 import { UserRepository } from '../repositories/user.repository.js';
 import { generateRefreshToken, generateToken, handleForgotPassword, handleResetPassword, verifyRefreshToken } from '../services/auth.service.js';
+import { R2Service } from '../services/r2.service.js';
+import { validateImageOrThrow } from '../utils/image.utils.js';
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -57,7 +59,7 @@ export const refreshToken = async (req: Request, res: Response) => {
 export const register = async (req: Request, res: Response) => {
   const {
     tipo_usuario, nombres, apellidos, correo, password,
-    id_estado, id_municipio, id_ciudad, telefono, foto_perfil
+    id_estado, id_municipio, id_ciudad, telefono
   } = req.body;
 
   try {
@@ -65,11 +67,40 @@ export const register = async (req: Request, res: Response) => {
     if (existingUser)
       return res.status(400).json({ message: 'El correo electrónico ya está registrado' });
 
+    let fotoPerfilKey: string | null = null;
+
+    if (req.file) {
+      try {
+        validateImageOrThrow(req.file);
+
+        const result = await R2Service.uploadImage(
+          req.file.buffer,
+          req.file.originalname,
+          'profiles',
+          {
+            width: 400,
+            height: 400,
+            quality: 80,
+            format: 'webp'
+          }
+        );
+
+        fotoPerfilKey = result.key; 
+
+      } catch (error: unknown) {
+        console.error('[Auth-Controller] Error subiendo imagen:', error);
+        return res.status(400).json({
+          message: 'Error al procesar la imagen de perfil',
+          error: error
+        });
+      }
+    }
+
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     const newUser = await UserRepository.create({
-      tipo_usuario: tipo_usuario || 'user',
+      tipo_usuario: tipo_usuario || 'Cliente',
       id_estado,
       id_municipio,
       id_ciudad,
@@ -78,7 +109,7 @@ export const register = async (req: Request, res: Response) => {
       correo,
       password_hash: hashedPassword,
       telefono,
-      foto_perfil
+      foto_perfil: fotoPerfilKey || ''
     });
 
     const payload = {
@@ -90,12 +121,23 @@ export const register = async (req: Request, res: Response) => {
     const token = generateToken(payload);
     const refreshToken = generateRefreshToken(payload);
 
+    let fotoPerfilUrl = null;
+    if (fotoPerfilKey) {
+      try {
+        fotoPerfilUrl = await R2Service.getSignedUrl(fotoPerfilKey, Number(process.env.R2_TIME_EXPIRE_IMAGE) || 3600);
+      } catch (error) {
+        console.error('[Auth-Controller] Error generando URL firmada:', error);
+      }
+    }
+
     res.status(201).json({
       message: 'Usuario creado exitosamente',
       user: {
         id: newUser.id_usuario,
         correo: newUser.correo,
-        tipo_usuario: newUser.tipo_usuario
+        tipo_usuario: newUser.tipo_usuario,
+        foto_perfil: fotoPerfilKey,
+        foto_perfil_url: fotoPerfilUrl 
       },
       token,
       refreshToken

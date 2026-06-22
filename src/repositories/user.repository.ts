@@ -33,6 +33,7 @@ export const UserRepository = {
   },
 
   async update(id: string, data: Partial<User>): Promise<User | null> {
+    
     const sql = `
       UPDATE public.usuarios
       SET 
