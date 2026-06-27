@@ -27,6 +27,7 @@ import locateRoutes from './routes/locate.routes.js';
 import userRoutes from './routes/user.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import imageRoutes from './routes/image.routes.js';
+import eventRoutes from './routes/event.routes.js';
 
 // Configuración [variables de entorno]
 dotenv.config();
@@ -56,6 +57,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Rutas 
 app.use('/api/auth', authRoutes);
+app.use('/api/events', eventRoutes);
 app.use('/api/images', imageRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/clients', clientRoutes);
